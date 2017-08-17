@@ -1,0 +1,322 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>OSU CSE 3521 Au17</title>
+
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+
+        <!-- Page-specific styles -->
+        <link rel="stylesheet" href="styles.css" type="text/css" />
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">CSE 3521 (Autumn 2017)</a>
+                </div>
+                <div id="navbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="https://osu.instructure.com/courses/26510">Carmen</a></li>
+                        <li><a href="resources/syllabus.pdf">Syllabus</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container" id="course-info">
+            <h1>Intro to Artificial Intelligence</h1>
+            <table>
+                <tr>
+                    <td class="field">Location:</td>
+                    <td class="value">Fontana Lab 142</td>
+                </tr>
+                <tr>
+                    <td class="field">Time:</td>
+                    <td class="value">WeFr 9:35am-10:55am</td>
+                </tr>
+                <tr>
+                    <td class="field">Instructor:</td>
+                    <td class="value">Denis Newman-Griffis (I go by "Denny")</td>
+                </tr>
+                <tr>
+                    <td class="field">Email:</td>
+                    <td class="value"><a href="mailto:newman-griffis.1@osu.edu">newman-griffis.1@osu.edu</a></td>
+                </tr>
+                <tr>
+                    <td class="field">Office Hours:</td>
+                    <td class="value">WeFr 1-2pm (Dreese 580), or by appointment</td>
+                </tr>
+                <tr>
+                    <td class="field">Grader:</td>
+                    <td class="value">TBD</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="container" id="cat-box">
+            <img src="resources/cat.jpg" />
+        </div>
+
+        <div class="container clearfix" id="summary">
+            <p>
+            Welcome to CSE 3521!  This site is home to all the course information, including <a href="resources/syllabus.pdf">the syllabus</a>
+            and the course schedule.  Class slides will be posted here, as will homeworks and any suggested further reading.
+            </p>
+
+            <p>
+            Homework submission will be done through the <a href="https://osu.instructure.com/courses/26510">Carmen</a> dropbox system.  Homework
+            will be a mix of written and programming assignments; all programming will be done in Python 2.7 (available on stdlinux; only standard
+            packages included on stdlinux will be allowed).
+            </p>
+        </div>
+
+        <div class="container clearfix" id="schedule">
+            <h3>Course Schedule (subject to change)</h3>
+
+            <table>
+                <tr class="header-row">
+                    <th class="date">Date</th>
+                    <th class="topic">Topic</th>
+                    <th class="homework">Homework</th>
+                    <th class="further">Further reading</th>
+                </tr>
+
+                <tr>
+                    <td class="date">8/23</td>
+                    <td class="topic">Course intro/overview</td>
+                    <td class="homework">HW #0 out</td>
+                    <td class="further">
+                        <a href="resources/Grosz2012.pdf">Grosz on updating the Turing Test</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date">8/25</td>
+                    <td class="topic">Intelligent agents and searching</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">8/30</td>
+                    <td class="topic">Uninformed search</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">9/1</td>
+                    <td class="topic">Informed search</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">9/6</td>
+                    <td class="topic">Minimax and alpha/beta pruning</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">9/8</td>
+                    <td class="topic">Logical agents, propositional logic</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">9/13</td>
+                    <td class="topic">First-order logic</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">9/15</td>
+                    <td class="topic">Inference in first-order logic</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">9/20</td>
+                    <td class="topic">Planning and expert systems</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">9/22</td>
+                    <td class="topic">Expert systems</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">9/27</td>
+                    <td class="topic">Markov Decision Processes</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">9/29</td>
+                    <td class="topic">Robotics</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">10/4</td>
+                    <td class="topic">Intro to probability and midterm review</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">10/6</td>
+                    <td class="bold" class="topic">MIDTERM</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">10/11</td>
+                    <td class="topic">More on probability</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">10/13</td>
+                    <td colspan="3" class="break">AUTUMN BREAK - NO CLASS</td>
+                </tr>
+
+                <tr>
+                    <td class="date">10/18</td>
+                    <td class="topic">Bayesian reasoning</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">10/20</td>
+                    <td class="topic">Hidden Markov Models and Bayes Nets</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">10/25</td>
+                    <td class="topic">Intro to machine learning</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">10/27</td>
+                    <td class="topic">Mechanics of parameter estimation</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">11/1</td>
+                    <td class="topic">Reinforcement learning I</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">11/3</td>
+                    <td class="topic">Reinforcement learning II</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">11/8</td>
+                    <td class="topic">Neural networks</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">11/10</td>
+                    <td class="topic">Backpropagation and NN training</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">11/15</td>
+                    <td class="topic">Applications: speech and language</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">11/17</td>
+                    <td class="topic">Applications: computer vision</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">11/22</td>
+                    <td colspan="3" rowspan="2" class="break">THANKSGIVING BREAK</td>
+                </tr>
+                <tr>
+                    <td class="date">11/24</td>
+                </tr>
+
+                <tr>
+                    <td class="date">11/29</td>
+                    <td class="topic">Society of mind</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">12/1</td>
+                    <td class="topic">Considering ethics</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+
+                <tr>
+                    <td class="date">12/6</td>
+                    <td class="topic">Review for final</td>
+                    <td class="homework"></td>
+                    <td class="further"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!--
+        <div class="container clearfix">
+            <h3>Course Summary</h3>
+            A survey of basic concepts and techniques for problem solving and knowledge representation paradigms in AI.
+
+            <h4>Learning Objectives</h4>
+            Assuming you pay attention and do the work, by the end of the course you will have learned:
+            <ul>
+                <li>AI terminology</li>
+                <li>Fundamentals of problem solving in AI</li>
+                <li>Fundamentals of knowledge representation</li>
+                <li>Fundamentals of machine learning</li>
+            </ul>
+        </div>
+
+        <div class="container clearfix">
+            <h3>Course Policies</h3>
+        </div>
+        -->
+    </body>
+</html>
