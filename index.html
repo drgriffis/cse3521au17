@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="styles.css" type="text/css" />
     </head>
 
-    <body>
+    <body id="homepage">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -23,12 +23,19 @@
                     <ul class="nav navbar-nav">
                         <li><a href="https://osu.instructure.com/courses/26510">Carmen</a></li>
                         <li><a href="resources/syllabus.pdf">Syllabus</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Homework <span class="caret"></span></a>
+                            <div id="homework-list" class="dropdown-menu">
+                                <ul>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <div class="container" id="course-info">
+        <div class="container first-below-navbar" id="course-info">
             <h1>Intro to Artificial Intelligence</h1>
             <table>
                 <tr>
@@ -89,7 +96,7 @@
                 <tr>
                     <td class="date">8/23</td>
                     <td class="topic"><a href="resources/1-introduction.pptx">Course intro/overview</a></td>
-                    <td class="homework">HW #0 out</td>
+                    <td class="homework"><a href="homework/homework_0.html">HW 0</a> out (due 8/30)</td>
                     <td class="further">
                         <a href="resources/Grosz2012.pdf">Grosz on updating the Turing Test</a>
                     </td>
@@ -105,7 +112,7 @@
                 <tr>
                     <td class="date">8/30</td>
                     <td class="topic">Uninformed search</td>
-                    <td class="homework"></td>
+                    <td class="homework">HW 0 due</td>
                     <td class="further"></td>
                 </tr>
 
@@ -316,5 +323,14 @@
             <h3>Course Policies</h3>
         </div>
         -->
+
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+        <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>-->
+        <!-- Page-specific -->
+        <script type="text/javascript" src="scripts.js"></script>
     </body>
 </html>

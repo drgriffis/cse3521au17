@@ -1,59 +1,103 @@
 /* Styles for CSE 3521 website */
 
-#course-info {
+/** General styles **/
+
+.container.first-below-navbar {
+    margin-top: 55px;
+}
+.code_snippet {
+    margin-left: 20px;
+}
+.footer {
+    text-align: center;
+    font-size: 10px;
+    font-style: italic;
+    color: #555555;
+}
+
+#homework-list ul {
+    padding-left:0px;
+}
+#homework-list li {
+    display: block;
+}
+#homework-list li a {
+    display:block;
+    width:100%;
+    padding-top:10px;
+    padding-bottom:10px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+    background: #fff;
+}
+#homework-list li a.darkened {
+    background: #eee;
+}
+
+.homework-title {
+    text-align:center;
+}
+
+/** End general styles **/
+
+/** Homepage-specific styles **/
+
+#homepage #course-info {
     margin-top: 75px;
     float: left;
     width: 60%;
     padding-left: 50px;
 }
-#course-info td.field {
+#homepage #course-info td.field {
     font-weight:bold;
 }
-#course-info td.value {
+#homepage #course-info td.value {
     padding-left: 10px;
 }
 
-#cat-box {
+#homepage #cat-box {
     margin-top: 55px;
     float: left;
     width: 40%;
 }
 
-#summary {
+#homepage #summary {
     clear:both;
     padding-top: 25px;
 }
 
-#schedule {
+#homepage #schedule {
     margin-left: auto;
     margin-right: auto;
     clear: both;
 }
-#schedule td {
+#homepage #schedule td,#homepage #schedule th {
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
-#schedule td.break {
+#homepage #schedule td.break {
     font-style: italic;
     background: #dddddd;
     text-align: center;
 }
-#schedule .date {
+#homepage #schedule .date {
     width: 80px;
     text-align: center;
 }
-#schedule .slides {
+#homepage #schedule .slides {
     width: 80px;
     text-align: center;
 }
-#schedule .homework {
-    width: 150px;
+#homepage #schedule .homework {
+    width: 160px;
     text-align: center;
     overflow: wrap;
 }
-#schedule .topic {
+#homepage #schedule .topic {
     width: 300px;
     overflow: wrap;
 }
+
+/** End homepage-specific styles **/
