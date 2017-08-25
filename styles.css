@@ -99,5 +99,8 @@
     width: 300px;
     overflow: wrap;
 }
+#homepage #schedule .topic .sub-resources {
+    padding-left:30px;
+}
 
 /** End homepage-specific styles **/
