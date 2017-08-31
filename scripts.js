@@ -14,6 +14,7 @@ $(document).ready(function () {
     var homeworks = {
         'Python Basics': prefix+'python-basics.html',
         'Homework 0': prefix+'homework/homework_0.html',
+        'Homework 1': prefix+'homework/homework_1.html',
     }
     for (var name in homeworks) {
         $('#homework-list ul').append(
