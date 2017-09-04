@@ -54,10 +54,12 @@
       <p>As in Homework 0, this project includes an autograder for you to grade your answers on your machine. This can be run with the command:</p>
       <pre>python autograder.py</pre>
       <p>See the autograder tutorial in Homework 0 for more information about using the autograder.</p>
-      <p>The code for this project consists of several Python files, some of which you will need to read and understand in order to complete the assignment, and some of which you can ignore. You can download all of the files for this homework as a zip archive: <a href="../resources/1-search.zip">1-search.zip</a>. Unzip this file and examine its contents:</p>
+      <p>The code for this project consists of several Python files, some of which you will need to read and understand in order to complete the assignment, and some of which you can ignore. You can download all of the files for this homework as a zip archive: <a href="../resources/1-search-v2.zip">1-search.zip</a>. Unzip this file and examine its contents:</p>
       <p><b>Files you'll edit:</b></p>
       <ul>
         <li><code>uninformed_search.py</code>: Where your algorithms for uninformed search (Questions 1-3) will reside.</li>
+        <li><code>astar_search.py</code>: Where your A* and heuristic implementations (Questions 4-5) will live.</li>
+        <li><code>multiAgents.py</code>: Where your minimax and alpha-beta pruning implementations (Questions 6-7) will live.</li>
       </ul>
       <p><b>Files you'll want to take a look at:</b></p>
       <ul>
@@ -79,10 +81,10 @@
           <li><code>testParser.py</code>: Parses autograder test and solution files</li>
           <li><code>testClasses.py</code>: General autograding test classes</li>
           <li><code>test_cases/</code>:Directory containing the test cases for each question</li>
-          <li><code>searchTestClasses.py</code>: Project 1 specific autograding test classes</li>
+          <li><code>searchTestClasses.py</code>: Homework 1 specific autograding test classes</li>
       </ul>
       <p></p>
-      <p><strong>Files to Edit and Submit:</strong> For Questions 1-3, you will fill in portions of <code>uninformed_search.py</code> during the assignment.  Submission instructions will be posted soon.</p>
+      <p><strong>Files to Edit and Submit:</strong> You will fill in portions of <code>uninformed_search.py</code> (for Questions 1-3), <code>astar_search.py</code> (for Questions 4-5), and <code>multiAgents.py</code> (Questions 6-7) during the assignment.  Submission instructions will be posted soon.</p>
       <p><strong>Evaluation:</strong> Your code will be autograded for technical correctness. Please <em>do not</em> change the names of any provided functions or classes within the code, or you will wreak havoc on the autograder. However, the correctness of your implementation -- not the autograder's judgements -- will be the final judge of your score. If necessary, I will review and grade assignments individually to ensure that you receive due credit for your work.</p>
       <p><strong>Academic Dishonesty:</strong> We will be checking your code against other submissions in the class for logical redundancy. If you copy someone else's code and submit it with minor changes, I will know. I trust you all to submit your own work only; <em>please</em> don't let me down. If you do, I will pursue the strongest consequences available to me.</p>
       <p><strong>Getting Help:</strong> You are not alone! If you find yourself stuck on something, feel free to email me or come to office hours (listed on <a href="../index.html">the course webpage</a>.. Office hours and discussion on Slack are there for your support; please use them. I want these projects to be rewarding and instructional, not frustrating and demoralizing. But, I don't know when or how to help unless you ask!</p>
@@ -93,7 +95,7 @@
 
     <div class="project">
       <h3><a name="Welcome"></a>Welcome to Pacman</h3>
-      <p>After downloading the code (<code><a href="../resources/1-search.zip">1-search.zip</a></code>), unzipping it, and changing to the directory, you should be able to play a game of Pacman by typing the following at the command line:</p>
+      <p>After downloading the code (<code><a href="../resources/1-search-updated.zip">1-search.zip</a></code>), unzipping it, and changing to the directory, you should be able to play a game of Pacman by typing the following at the command line:</p>
       <pre>python pacman.py</pre>
       <p>Pacman lives in a shiny blue world of twisting corridors and tasty round treats. Navigating this world efficiently will be Pacman's first step in mastering his domain.</p>
       <p>The simplest agent in <code>searchAgents.py</code> is called the <code>GoWestAgent</code>, which always goes West (a trivial reflex agent). This agent can occasionally win:</p>
@@ -118,6 +120,7 @@
             <li>Make sure to <b>use</b> the <code>Stack</code>, <code>Queue</code> and <code>PriorityQueue</code> data structures provided to you in <code>util.py</code>! These data structure implementations have particular properties which are required for compatibility with the autograder.</li>
             <li>Get familiar with the methods in the <code>SearchProblem</code> class in <code>search.py</code>!  You'll need to <b>use these methods</b> as part of your search implementations.</li>
             <li>Remember that lists in Python are passed by reference; if you're seeing actions show up in a list that shouldn't be there, <b>make sure you're copying your actions to a new list every time</b>!</li>
+            <li><b>The autograder is not the final word!</b> It is very possible to correctly implement these algorithms, but have the autograder consider it wrong because you didn't use the right data structures or methods.  Final grades will be assigned by examining your implementation, not just using the autograder output.</li>
         </ul>
     </div>
 
@@ -174,9 +177,134 @@
       <p><em>Note:</em> You should get very low and very high path costs for the <code>StayEastSearchAgent</code> and <code>StayWestSearchAgent</code> respectively, due to their exponential cost functions (see <code>searchAgents.py</code> for details).</p>
     </div>
 
-<hr>
+    <hr/>
 
-<h3>More on the way...</h3>
+    <div class="project">
+      <h3><a name="Q4"></a>Question 4 (3 points): A* search</h3>
+      <p>Implement A* graph search in the empty function <code>aStarSearch</code> in <code>astar_search.py</code>. A* takes a heuristic function as an argument. Heuristics take two arguments: a state in the search problem (the main argument), and the problem itself (for reference information). The <code>nullHeuristic</code> heuristic function in <code>astar_search.py</code> is a trivial example.</p>
+      <p>You can test your A* implementation on the original problem of finding a path through a maze to a fixed position using the Manhattan distance heuristic (implemented already as <code>manhattanHeuristic</code> in <code>astar_search.py</code>).</p>
+      <pre>python pacman.py -l bigMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic</pre>
+      <p>You should see that A* finds the optimal solution slightly faster than uniform cost search (about 549 vs. 620 search nodes expanded in my implementation, but ties in priority may make your numbers differ slightly). What happens on <code>openMaze</code> for the various search strategies?</p>
+    </div>
+
+    <hr/>
+
+    <div class="project">
+      <h3><a name="Q5"></a>Question 5 (4 points): Eating All The Dots</h3>
+      <p><i>Note: Make sure to complete Question 4 before working on Question 5, because Question 5 builds upon your answer for Question 4.</i></p>
+      <p>Now we'll solve a hard search problem: eating all the Pacman food in as few steps as possible. For this, we'll need a new search problem definition which formalizes the food-clearing problem: <code>FoodSearchProblem</code> in <code>searchAgents.py</code> (implemented for you). A solution is defined to be a path that collects all of the food in the Pacman world. For the present project, solutions do not take into account any ghosts or power pellets; solutions only depend on the placement of walls, regular food and Pacman. (Of course ghosts can ruin the execution of a solution! We'll get to that in the next question.) If you have written your general search methods correctly, <code>A*</code> with a null heuristic (equivalent to uniform-cost search) should quickly find an optimal solution to <code>testSearch</code> with no code change on your part (total cost of 7).</p>
+      <pre>python pacman.py -l testSearch -p AStarFoodSearchAgent</pre>
+      <p><em>Note:</em><code> AStarFoodSearchAgent</code> is a shortcut for <code>-p SearchAgent -a fn=astar,prob=FoodSearchProblem,heuristic=foodHeuristic</code>.</p>
+      <p>You should find that UCS (<code>AStarFoodSearchAgent</code> with the default null heuristic implementation of <code>foodHeuristic</code>) starts to slow down even for the seemingly simple <code>tinySearch</code>. As a reference, my implementation takes about half a second to find a path of length 27 after expanding 5057 search nodes.</p>
+      <p>Fill in <code>foodHeuristic</code> in <code>astar_search.py</code> with a <emph> consistent </emph> heuristic for the <code>FoodSearchProblem</code>. Try your agent on the <code>trickySearch</code> board:</p>
+      <pre>python pacman.py -l trickySearch -p AStarFoodSearchAgent</pre>
+      <p>My UCS agent finds the optimal solution in a few seconds, exploring over 16,000 nodes.</p>
+      <p>Any non-trivial non-negative consistent heuristic will receive 1 point. Make sure that your heuristic returns 0 at every goal state and never returns a negative value. Depending on how few nodes your heuristic expands, you'll get additional points:</p>
+      <table align="center" border="1" cellspacing="1" cellpadding="5">
+        <tbody>
+          <tr><th>Number of nodes expanded</th><th>Grade</th></tr>
+          <tr>
+            <td>more than 15000</td>
+            <td>1/4</td>
+          </tr>
+          <tr>
+            <td>at most 15000</td>
+            <td>2/4</td>
+          </tr>
+          <tr>
+            <td>at most 12000</td>
+            <td>3/4</td>
+          </tr>
+          <tr>
+            <td>at most 9000</td>
+            <td>4/4 (full credit; medium)</td>
+          </tr>
+          <tr>
+            <td>at most 7000</td>
+            <td>5/4 (optional extra credit; hard)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p>
+      <p><em>Remember:</em> If your heuristic is inconsistent, you will receive <em>no</em> credit, so be careful! Can you solve <code>mediumSearch</code> in a short time? If so, either (a) I'm very, very impressed, or (b) your heuristic is inconsistent.</p>
+    </div>
+
+    <hr/>
+
+  <div class="project">
+    <h3><a name="Q6"></a>Question 6 (5 points): Minimax</h3>
+    <p>Now you will write an adversarial search agent in the provided <code>MinimaxAgent</code> class stub in <code>multiAgents.py</code>. Your minimax agent should work with any number of ghosts, so you'll have to write an algorithm that is slightly more general than what you've previously seen in lecture. In particular, your minimax tree will have multiple min layers (one for each ghost) for every max layer.</p>
+    <p>Your code should also expand the game tree to an arbitrary depth. Score the leaves of your minimax tree with the supplied <code>self.evaluationFunction</code>, which defaults to <code>scoreEvaluationFunction</code>. <code>MinimaxAgent</code> extends <code>MultiAgentSearchAgent</code>, which gives access to <code>self.depth</code> and <code>self.evaluationFunction</code>. Make sure your minimax code makes reference to these two variables where appropriate as these variables are populated in response to command line options.</p>
+    <p><em>Important:</em> A single search ply is considered to be one Pacman move and all the ghosts' responses, so depth 2 search will involve Pacman and each ghost moving two times.</p>
+    <p><em>Grading</em>: We will be checking your code to determine whether it explores the correct number of game states. This is the only way reliable way to detect some very subtle bugs in implementations of minimax. As a result, the autograder will be <em>very</em> picky about how many times you call <code>GameState.generateSuccessor</code>. If you call it any more or less than necessary, the autograder will complain. To test and debug your code, run</p>
+    <pre>python autograder.py -q q2</pre>
+    <p>This will show what your algorithm does on a number of small trees, as well as a pacman game. To run it without graphics, use:</p>
+    <pre>python autograder.py -q q2 --no-graphics</pre>
+    <p><em><strong>Hints and Observations</strong></em></p>
+    <ul>
+      <li>The correct implementation of minimax will lead to Pacman losing the game in some tests. This is not a problem: as it is correct behaviour, it will pass the tests.</li>
+      <li>The evaluation function for the pacman test in this part is already written (<code>self.evaluationFunction</code>). You shouldn't change this function, but recognize that now we're evaluating *states* rather than actions, as we were for the reflex agent. Look-ahead agents evaluate future states whereas reflex agents evaluate actions from the current state.</li>
+      <li>The minimax values of the initial state in the <code>minimaxClassic</code> layout are 9, 8, 7, -492 for depths 1, 2, 3 and 4 respectively. Note that your minimax agent will often win (66/100 games for me) despite the dire prediction of depth 4 minimax.
+        <pre>python pacman.py -p MinimaxAgent -l minimaxClassic -a depth=4</pre>
+      </li>
+      <li>Pacman is always agent 0, and the agents move in order of increasing agent index.</li>
+      <li>All states in minimax should be <code>GameStates</code>, either passed in to <code>getAction</code> or generated via <code>GameState.generateSuccessor</code>. In this project, you will not be abstracting to simplified states.</li>
+      <li>On larger boards such as <code>openClassic</code> and <code>mediumClassic</code> (the default), you'll find Pacman to be good at not dying, but quite bad at winning. He'll often thrash around without making progress. He might even thrash around right next to a dot without eating it because he doesn't know where he'd go after eating that dot. Don't worry if you see this behavior, question 5 will clean up all of these issues.</li>
+      <li>When Pacman believes that his death is unavoidable, he will try to end the game as soon as possible because of the constant penalty for living. Sometimes, this is the wrong thing to do with random ghosts, but minimax agents always assume the worst:
+        <pre>python pacman.py -p MinimaxAgent -l trappedClassic -a depth=3</pre>
+        Make sure you understand why Pacman rushes the closest ghost in this case.</li>
+      </ul>
+    </div>
+
+    <hr/>
+
+    <div class="project">
+      <h3><a name="Q7"></a>Question 7 (5 points): Alpha-Beta Pruning</h3>
+      <p>Make a new agent that uses alpha-beta pruning to more efficiently explore the minimax tree, in <code>AlphaBetaAgent</code>. Again, your algorithm will be slightly more general than the pseudocode from lecture, so part of the challenge is to extend the alpha-beta pruning logic appropriately to multiple minimizer agents.</p>
+      <p>You should see a speed-up (perhaps depth 3 alpha-beta will run as fast as depth 2 minimax). Ideally, depth 3 on <code>smallClassic</code> should run in just a few seconds per move or faster.</p>
+      <pre>python pacman.py -p AlphaBetaAgent -a depth=3 -l smallClassic</pre>
+      <p>The <code>AlphaBetaAgent</code> minimax values should be identical to the <code>MinimaxAgent</code> minimax values, although the actions it selects can vary because of different tie-breaking behavior. Again, the minimax values of the initial state in the <code>minimaxClassic</code> layout are 9, 8, 7 and -492 for depths 1, 2, 3 and 4 respectively.</p>
+      <p><em>Grading</em>: Because we check your code to determine whether it explores the correct number of states, it is important that you perform alpha-beta pruning without reordering children. In other words, successor states should always be processed in the order returned by <code>GameState.getLegalActions</code>. Again, do not call <code>GameState.generateSuccessor</code> more than necessary.</p>
+      <p><b>You must <i>not</i> prune on equality in order to match the set of states explored by the autograder.</b> (Indeed, alternatively, but incompatible with the autograder, would be to also allow for pruning on equality and invoke alpha-beta once on each child of the root node, but this will <i>not</i> match the autograder.)</p>
+      <p>The pseudo-code below represents the algorithm you should implement for this question.</p>
+      <div style="text-align: center; margin-bottom: 10px;"><img style="max-width: 500px;" alt="" src="https://s3-us-west-2.amazonaws.com/cs188websitecontent/projects/release/multiagent/v1/002/alpha-beta-on-inequality.png" /></div>
+      <p>To test and debug your code, run</p>
+      <pre>python autograder.py -q q7</pre>
+      <p>This will show what your algorithm does on a number of small trees, as well as a pacman game. To run it without graphics, use:</p>
+      <pre>python autograder.py -q q7 --no-graphics</pre>
+      <p>The correct implementation of alpha-beta pruning will lead to Pacman losing some of the tests. This is not a problem: as it is correct behaviour, it will pass the tests.</p>
+    </div>
+
+    <hr/>
+
+    <div class="project">
+      <h3><a name="Q8"></a>Question 8 (7 points): Search problem formulations</h3>
+      <p>Remember that a <b>search problem formulation</b> has the following three components:</p>
+      <ul>
+        <li>A <b>state space</b>: the set of possible worlds relevant to the problem, including a designated start state <em>(Remember that this may not include everything in the world!  E.g., ghost positions for an invincible Pacman.)</em></li>
+        <li>A <b>successor function</b>: defines what actions can lead from one state to another, and the cost of those actions.</li>
+        <li>A <b>goal test</b>: given a state, determines if that state has achieved the goal of the problem <em>(e.g., eating all the dots)</em>.
+      </ul>
+      <p>Submit a written document (can be a <code>.txt</code> file, a <code>.docx</code>, or a <code>.pdf</code> file) answering the following three questions.</p>
+
+      <p>(A) Explain why formulating the <b>goal</b> of a search problem must be the first step in turning a problem description into a problem formulation. (1-2 sentences)</p>
+      <p>Give a complete problem formulation for each of the following two problems.  Your formulation should be roughly half a page, with the state space, successor function, and goal test labeled.  Your description should be precise enough to implement, though you do not have to fully enumerate the state space or the successor function.</p>
+      <p>(B) There is an <em>n x n</em> grid of squares, each square initially being either unpainted floor or a bottomless pit. You start standing on an unpainted floor square, and can either paint the square under you or move onto an adjacent unpainted floor square. You want the whole floor painted.</p>
+      <p>(C) Three scientists and three malfunctioning killbots are on one side of a river, along with a boat that can hold one or two people. (Assume that scientists and killbots weigh the same.)  Find a way to get everyone to the other side without ever leaving a group of scientists in one place outnumbered by the killbots in that place.</p>
+    </div>
+
+    <hr/>
+
+    <div class="project">
+        <h3><a name="EC"></a>Extra Credit (3 points): Curing cancer</h3>
+        <p>Write 1-2 paragraphs describing how the cure for cancer can be formulated as a search problem.  How many agents are involved in this task?  Is it cooperative or competitive?  Static or dynamic?  What sorts of heuristics might be useful in searching for a solution?</p>
+    </div>
+
+<hr/>
+
+<h3>Submission</h3>
+<p>Please zip up <code>uninformed_search.py</code>, <code>astar_search.py</code>, <code>multiAgents.py</code>, and your written answers for Question 8 (and optionally the extra credit).  Submit the zip file <a href="https://osu.instructure.com/courses/26510/assignments/434491">via Carmen</a>.</p>
+
         </div>
 
         <div class="footer">
