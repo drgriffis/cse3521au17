@@ -103,4 +103,14 @@
     padding-left:30px;
 }
 
+#homepage .grader_row td.value {
+    padding-top: 25px;
+}
+#homepage .grader_row td.field {
+    padding-top: 25px;
+}
+#homepage .grader_row #second_grader {
+    margin-top: 10px;
+}
+
 /** End homepage-specific styles **/
