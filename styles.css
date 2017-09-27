@@ -95,6 +95,12 @@
     text-align: center;
     overflow: wrap;
 }
+#homepage #schedule .further {
+    width: 300px;
+    overflow: wrap;
+    padding-left:20px;
+    text-indent:-10px;
+}
 #homepage #schedule .topic {
     width: 300px;
     overflow: wrap;
