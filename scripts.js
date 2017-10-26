@@ -17,6 +17,7 @@ $(document).ready(function () {
         'Homework 1': prefix+'homework/homework_1.html',
         'Homework 2': prefix+'homework/homework_2.pdf',
         'Homework 3': prefix+'homework/homework_3.html',
+        'Homework 4': prefix+'homework/homework_4.pdf',
         'EC: AI Seminar': prefix+'homework/ai_seminar.html'
     }
     for (var name in homeworks) {
