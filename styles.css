@@ -38,6 +38,15 @@
     text-align:center;
 }
 
+.project ol li {
+    margin-top:15px;
+}
+
+.hw5-img-container {
+    text-align:center;
+    width:100%;
+}
+
 /** End general styles **/
 
 /** Homepage-specific styles **/

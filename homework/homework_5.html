@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>OSU CSE 3521 Au17</title>
+
+        <!-- Bootstrap -->
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+
+        <!-- Page-specific styles -->
+        <link rel="stylesheet" href="../styles.css" type="text/css" />
+    </head>
+
+    <body id="homework0">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../index.html">CSE 3521 (Autumn 2017)</a>
+                </div>
+                <div id="navbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="https://osu.instructure.com/courses/26510">Carmen</a></li>
+                        <li><a href="../resources/syllabus.pdf">Syllabus</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Homework <span class="caret"></span></a>
+                            <div id="homework-list" class="dropdown-menu">
+                                <ul>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="https://osu-cse-3521.slack.com">Slack</a></li>
+                        <li><a href="https://app.tophat.com/e/827255">TopHat</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+<div class="container first-below-navbar">
+
+<div class="homework-title">
+    <h3>Homework 5: Machine Learning (due 11/17 at 11:59pm via Carmen)</h3>
+</div>
+
+    <div class="project">
+      <h3><a name="LearningGoals"></a>Learning Goals</h3>
+      <p>What I want to evaluate with this assignment is:</p>
+      <ul>
+        <li>Ability to distinguish between classification, regression, and clustering as kinds of machine learning problems</li>
+        <li>Ability to understand and implement important classification and clustering algorithms</li>
+        <li>Understanding of task-specific considerations in feature engineering</li>
+      </ul>
+
+      <h3><a name="Introduction"></a>Introduction</h3>
+      <p>
+        In this project, you will implement the k-Nearest Neighbors classification and k-Means clustering algorithms that we discussed in class, and explore how
+        they (and logistic regression) behave on different kinds of data.
+      </p>
+      <p>
+        This project includes a set of automated tests to check that your implementations are working properly.
+        These tests are simpler than in previous projects.  They can be run with the command:
+      </p>
+      <pre>python run_tests.py</pre>
+      <p>
+        The code for this project contains the following files, which are available as a zip archive: <a href="../resources/5-machine-learning.zip">5-machine-learning.zip</a>.
+      </p>
+      <p></p>
+      <p><b>Files in this package:</b></p>
+      <ul>
+          <li><code>knn.py</code>: Where your implementation of k-Nearest Neighbors classification will go (used for Question 2).</li>
+          <li><code>kmeans.py</code>: Where your implementation of k-Means clustering will go (used for Question 3).</li>
+          <li><code>logistic_regression.py</code>: An implementation I have provided of gradient descent learning for logistic regression (used for Question 4).</li>
+          <li><code>datasets.py</code>: Wrapper around several pre-constructed datasets that you can use for this project.</li>
+          <li><code>run_tests.py</code>: Runs automated tests on your k-Nearest Neighbors and k-Means implementations.</li>
+          <li><code>test_cases/</code>: Directory containing the k-Nearest Neighbors and k-Means tests that <code>run_tests.py</code> executes.</li>
+          <li><code>plotting.py</code>: File with some useful functions for graphing results of your algorithms.  See <a href="#plotting">more info below.</a></li>
+      </ul>
+      <p></p>
+      <p><strong>Files to Edit and Submit:</strong>
+        You will fill in portions of <code>knn.py</code> and <code>kmeans.py</code> during the assignment; these are the only code files you need to submit.
+        In addition, for questions 1, 4, and 5, you will need to write your answers in a text file, Word document, or PDF; you will submit this along with your code files.
+      </p>
+      <p><strong>Evaluation:</strong>
+        The main thing we are evaluating is that <b>you understand the main ideas</b>.  We will be reviewing your written answers
+        and implementations to see if you understood and tried your best to implement the ideas we discussed in class.
+      </p>
+      <p>I also expect that your implementations of the two algorithms will be correct.  <b>If you pass the tests provided, you're all set.</b>  If your implementation is not
+      passing these tests, please review the test output and/or seek help from the instructor or TAs as necessary to help correct your implementation.  Passing the unseen
+      test cases <b>will be a part of your grade</b>, but your demonstration that you understand the ideas is the majority of your score.</p>
+      <p><strong>Getting Help:</strong> You are not alone! If you find yourself stuck on something, feel free to email me (or the graders) or come to any of our office hours (listed on <a href="../index.html">the course webpage</a>) for help.  Office hours and discussion on Slack are there for your support; please use them. I want these projects to be rewarding and instructional, not frustrating and demoralizing. But, I don't know when or how to help unless you ask!</p>
+      <p><strong>Discussion on Slack:</strong> Feel free to ask for help debugging, but please don't post any code snippets!</p>
+    </div>
+
+    <hr/>
+
+    <div class="project">
+      <h3><a name="Q1"></a>Question 1 (2 points): Classification/Regression/Clustering</h3>
+        <p>
+            Please answer the following questions about different machine learning problems.
+        </p>
+        <ol type="A">
+            <li>I have a dataset of lunch orders from Oxley's, which includes the price of the order, the preparation time (how long it took from when the order went in to when the food
+                was ready), and a satisfaction rating: Great, Meh, or Terrible.  I would like to learn to predict the satisfaction rating for new orders that
+                come in, based on their price and preparation time. <b>Is this classification, clustering, or regression?</b></li>
+            <li>I've found a really interesting psychology textbook in the library stacks.  I'd like to ask the librarians for a list of similar books, based on the words that are used
+                in the first 100 pages.  <b>Am I asking them for a classification, clustering, or regression?</b></li>
+            <li>I'm working with data about how long people stay active on Facebook in a single user session.  My old model predicted active time continuously (i.e., it might say you'd
+                spend 32.4 seconds on Facebook, or 1,682.9 seconds).  However, Zuckerberg wants simpler ways of modeling user behavior, so the new model bins active time into
+                categories: &lt;10 minutes, 10-30 minutes, 30-60 minutes, &gt;60 minutes.  <b>Have I changed machine learning problems?  If so, what was the old problem, and what is the new problem?</b></li>
+        </ol>
+        <p>
+            Put your answers to these questions in a text file, Word document, or PDF along with your answers to Questions 4 and 5.
+        </p>
+    </div>
+
+    <hr/>
+
+    <div class="project">
+      <h3><a name="Q2"></a>Question 2 (3 points): k-Nearest Neighbors</h3>
+      <p>
+        For this question, you will <b>implement the k-Nearest Neighbors classification algorithm</b>.
+      </p>
+      <p>
+        A function stub for <code>kNearestNeighbors</code> has been written in <code>knn.py</code>.
+        <em><b>Please read the comments for that method</b></em> and implement k Nearest Neighbors to give the output described.
+      </p>
+      <p>
+        To test your implementation, you can execute
+      </p>
+      <pre>python run_tests.py</pre>
+      <p>
+        This will run your implementation on several datasets, including the pictures one we used in class.  If your classification is incorrect,
+        your output will be shown along with the correct output. <b>Please use these tests to help debug your implementation!</b>
+      </p>
+      <p>
+        <b>Grading:</b> Your implementation will be graded on two things:
+        <ul>
+            <li>The classification output you generate on additional test cases that have not been provided to you</li>
+            <li>Whether you demonstrate that you understand the k-NN algorithm in your code.  <b>Even if you can't get it working, please write comments to indicate what you're trying to do, so you can get partial credit.</b></li>
+        </ul>
+      </p>
+    </div>
+
+    <hr/>
+
+    <div class="project">
+      <h3><a name="Q3"></a>Question 3 (3 points): k-Means</h3>
+      <p>
+        For this question, you will <b>implement the k-Means clustering algorithm</b>.
+      </p>
+      <p>
+        A function stub for <code>kMeans</code> has been written in <code>kmeans.py</code>.
+        <em><b>Please read the comments for that method</b></em> and implement k-Means to give the output described.
+      </p>
+      <p>
+        To test your implementation, you can execute
+      </p>
+      <pre>python run_tests.py</pre>
+      <p>
+        This will run your implementation on several datasets, including the various examples we used in class.  If your clustering is incorrect,
+        your output will be shown along with the correct output. <b>Please use these tests to help debug your implementation!</b>
+      </p>
+      <p>
+        <b>Grading:</b> Your implementation will be graded on two things:
+        <ul>
+            <li>The clustering output you generate on additional test cases that have not been provided to you</li>
+            <li>Whether you demonstrate that you understand the k-Means algorithm in your code.  <b>Even if you can't get it working, please write comments to indicate what you're trying to do, so you can get partial credit.</b></li>
+        </ul>
+      </p>
+    </div>
+
+    <hr/>
+
+    <div class="project">
+      <h3><a name="Q4"></a>Question 4 (4 points): Learning parameters for logistic regression</h3>
+        <p>
+            I have implemented gradient descent training for a logistic regression in <code>logistic_regression.py</code>.
+        </p>
+        <p>
+            You will find, at the bottom of that file, variables for four different 2-dimensional binary classification datasets:
+        </p>
+        <ul>
+            <li><code>separable_[training/test]_[data/labels]</code>: A fully linearly separable dataset</li>
+            <li><code>medium_[training/test]_[data/labels]</code>: A mostly linearly separable dataset (with some error)</li>
+            <li><code>inseparable_[training/test]_[data/labels]</code>: A completely inseparable dataset</li>
+            <li><code>features_[training/test]_[data/labels]</code>: A dataset for feature exploration (Question 5)</li>
+        </ul>
+        <p>
+            <b>For this question, you will only use the first three datasets.</b>
+        </p>
+        <p>
+            You will also find at the bottom of <code>logistic_regression.py</code> some example code for training and testing a logistic regression on one of these datasets.
+        </p>
+        <ol type="A">
+            <li><p>The default learning rate is 0.01.  Vary this value: try 0.00001, 0.1, 0.05, and/or other values in between.  <b>Describe</b> what happens on each of the three datasets.  Do you observe changes in the number of iterations to convergence?  Do the training error or train/test accuracy change?</p></li>
+            <li>
+                <p>Do the same exploration with the convergence criterion (<code>convergence_delta</code>).  The default value is 0.0005; try some higher and lower values, and <b>describe</b> what you see on each dataset.</p>
+                <p><em>Note</em> that for some very low values of <code>convergence_delta</code>, it may take a very long time to converge; in fact, due to floating point errors, you
+                 may never converge.  If you've been training a regression for more than 10 minutes, it's fine to cut it off and report that the training took too long to converge for
+                 that setting.</p>
+                 <p>In that case, if you plot the regression line you're learning as you go through (see <a href="#plotting">info on plotting</a> below), do you notice anything about the decision boundary and how much/little it's changing?</p>
+            </li>
+        </ol>
+    </div>
+
+    <div class="project">
+      <h3><a name="Q5"></a>Question 5 (3 points): Feature selection</h3>
+        <p>
+            Now you will use the <code>features_[training/test]_[data/labels]</code> dataset in <code>logistic_regression.py</code>.  This is a 5-dimensional dataset,
+            and your task is to evaluate which features are helpful for classification, and which ones are harmful.
+        </p>
+        <p>
+            To select a subset of the features, you can use code like the following:
+        </p>
+        <pre>features = [0,4]
+training_data = features_training_data[:,features]
+test_data = features_test_data[:,features]</pre>
+        <p>You can select any number of features; for example, <code>features = [0]</code> will select just the first feature, while <code>features=[0,2,4]</code> will select
+        the first, third, and fifth features.<p>
+        <ol type="A">
+            <li>Using test accuracy as your metric, <b>Are any of the individual features perfectly discriminative?</b> (i.e., give test accuracy=100%?)  <b>Which feature(s) is/are best?</b> <b>Provide accuracy numbers to justify your answer.</b></li>
+            <li>Try combinations of two or three features.  <b>What is the best performing combination of features you can find?  Again, provide accuracy numbers to justify your answer.</b>
+            <li>Discarding features isn't always a good idea, even if it improves performance.  However, sometimes it's necessary, when the features are just noisy and really hurt accuracy.  <b>Given the performance numbers you've seen so far, do you think that any of these 5 features are noisy enough that we should discard them?  Argue why or why not.</b></li>
+        </ol>
+    </div>
+
+    <hr/>
+
+    <h3>Submission</h3>
+    <p>
+        Zip up your implementations in <code>knn.py</code> and <code>kmeans.py</code>, along with your written answers to Questions 1, 4, and 5, and submit the zip file via Carmen.
+    </p>
+    <p>
+        You do <b>not</b> need to submit your copy of <code>logistic_regression.py</code>; I'm interested in the results of your experiments, not the code you used to run them.
+    </p>
+
+    <hr/>
+
+    <div class="project">
+      <h3><a name="plotting"></a>Helpful stuff: Plotting classification, clustering, and regression results</h3>
+      <p>
+        Visualizing the outputs of your current model is one of the most helpful things you can do in machine learning.  I've provided a number of plotting functions
+        for you in <code>plotting.py</code>, which are explained with usage examples below.
+      </p>
+      <p>
+        <b>Using these functions requires that you have <a href="http://matplotlib.org/users/installing.html">Matplotlib</a> installed.</b>  This is a visualization package
+        for Python, and unfortunately, <b>it is not available on stdlinux</b>.  However, you can follow the instructions at <a href="http://matplotlib.org/users/installing.html">
+        this link</a> to install it on your own computer for working on this assignment.
+      </p>
+      <p>
+        The functions available to you are:
+      </p>
+      <ul>
+        <li><code>scatter</code>: Creates a scatterplot</li>
+        <li><code>showClustering</code>: Displays current clustering assignments to data points</li>
+        <li><code>showClassification</code>: Displays labeled training data, along with test data with or without current predicted labels</li>
+        <li><code>showRegressionLine</code>: For logistic regression; displays labeled training data, along with the current decision boundary</li>
+      </ul>
+      <p>
+        Each of these functions will generate <code>.png</code> files in your working directory.
+      </p>
+      <p>
+        They are illustrated with usage and output examples below.
+      </p>
+
+      <h4><code>scatter(data, fname, ttl)</code></h4>
+      <p>Generates a scatter plot of 2-D <code>data</code>, with plot title <code>ttl</code>, and saves it in <code>fname.png</code>.</p>
+      <p>Usage example:</p>
+      <pre>import datasets
+import plotting
+data = datasets.clustering['two_d_uniform']
+plotting.scatter(data, ttl='2-D Uniform sample data')
+</pre>
+       <p>Output:</p>
+       <div class="hw5-img-container">
+        <img src="../resources/hw5imgs/scatter_example.png" />
+       </div>
+
+      <h4><code>showClustering(data, clustering, k, fname, ttl, centroids=None, show_clusters=True)</code></h4>
+      <p>Generates a scatter plot of 2-D <code>data</code>, optionally showing the current clustering centroids in <code>centroids</code> and the clustering assignment in <code>clustering</code> (hidden if <code>show_clusters=False</code>).  Plot is generated with title <code>ttl</code>, and saved to <code>fname.png</code>.</p>
+      <p>Usage example:</p>
+      <pre>import datasets
+import plotting
+import numpy as np
+data = datasets.clustering['lecture_example']
+clustering = np.array([0, 1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2])
+plotting.showClustering(data, clustering, 3, ttl='Lecture clustering Ex 2 (k=3)')
+</pre>
+       <p>Output:</p>
+       <div class="hw5-img-container">
+        <img src="../resources/hw5imgs/showClustering_example.png" />
+       </div>
+
+      <h4><code>showClassification(training_data, training_labels, test_data, test_labels, fname, ttl, show_test_labels=True)</code></h4>
+      <p>Displays the labeled training data and (optionally) predictions for test data.  Plot is generated with title <code>ttl</code>, and saved to <code>fname.png</code>.</p>
+      <p>Usage example:</p>
+      <pre>import datasets
+import plotting
+import numpy as np
+data = datasets.classification['two_class_separated_training_data']
+labels = datasets.classification['two_class_separated_training_labels']
+test_data = datasets.classification['two_class_separated_test_data']
+plotting.showClassification(
+    data,
+    labels,
+    test_data,
+    [None for _ in test_data],
+    ttl='2-Class Separated data',
+    show_test_labels=False
+)
+</pre>
+       <p>Output:</p>
+       <div class="hw5-img-container">
+        <img src="../resources/hw5imgs/showClassification_example.png" />
+       </div>
+
+
+      <h4><code>showRegressionLine(training_data, training_labels, weights, fname, ttl, use_data_bounds=True)</code></h4>
+      <p>Displays the labeled training data, along with the current linear decision boundary.  Plot is generated with title <code>ttl</code>, and saved to <code>fname.png</code>.</p>
+      <p>Usage example:</p>
+      <pre>import datasets
+import plotting
+import numpy as np
+data = datasets.logreg['two_gaussian_medium_training_data']
+labels = datasets.logreg['two_gaussian_medium_training_labels']
+weights = [...]  # skipping the actual numbers
+plotting.showRegressionLine(data, labels, weights, ttl='Logistic Regression progress (Iteration 27)')
+</pre>
+       <p>Output:</p>
+       <div class="hw5-img-container">
+        <img src="../resources/hw5imgs/showRegressionLine_example.png" />
+       </div>
+    </div>
+  </div>
+
+        </div>
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+
+        <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>-->
+        <!-- Page-specific -->
+        <script type="text/javascript" src="../scripts.js"></script>
+    </body>
+</html>
